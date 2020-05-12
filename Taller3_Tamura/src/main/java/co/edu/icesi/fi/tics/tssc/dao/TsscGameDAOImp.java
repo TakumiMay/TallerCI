@@ -55,22 +55,22 @@ public class TsscGameDAOImp implements TsscGameDAO {
 		String jpql = "Select game FROM TsscGame game WHERE game.description="+description;
 		return entityManager.createQuery(jpql).getResultList();
 	}
-//MALLL
+
 	@Override
 	public List<TsscGame> findByTopicId(long id) {
-		String jpql = "Select game FROM TsscGame game WHERE game.tsscTopic="+entityManager.find(TsscTopic.class, id);
+		String jpql = "Select game FROM TsscGame game WHERE game.tsscTopic.id="+id;
 		return entityManager.createQuery(jpql).getResultList();
 	}
 
 	@Override
 	public List<TsscGame> findByDateRange(LocalDate scheduledDate, LocalDate scheduledDate2) {
-		String jpql = "Select game FROM TsscGame game WHERE game.scheduledDate >="+scheduledDate+" OR game.scheduledDate <="+scheduledDate2;
+		String jpql = "Select game FROM TsscGame game WHERE game.scheduledDate BETWEEN "+scheduledDate+" AND "+scheduledDate2;
 		return entityManager.createQuery(jpql).getResultList();
 	}
 
 	@Override
 	public List<TsscGame> findByDateAndTimeRange(LocalDate scheduledDate, LocalTime localTime, LocalTime localTime2) {
-		String jpql = ("Select game FROM TsscGame game WHERE game.scheduledDate ="+scheduledDate+" AND (game.localTime >="+localTime+"OR game.localTime <="+localTime2+")");
+		String jpql = ("Select game FROM TsscGame game WHERE game.scheduledDate ="+scheduledDate+" AND game.localTime BETWEEN "+localTime+" AND "+localTime2);
 		return entityManager.createQuery(jpql).getResultList();
 	}
 

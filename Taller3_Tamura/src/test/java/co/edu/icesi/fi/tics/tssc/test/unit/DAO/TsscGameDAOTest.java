@@ -25,20 +25,75 @@ public class TsscGameDAOTest extends TestCase {
 
 	@Test
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-	public void crudPersona() {
-		TsscGame game = new TsscGame();
-		game.setAdminPassword("1234");
-		game.setGuestPassword("1234");
-		game.setName("hola");
-		game.setUserPassword("1234");
-		gameDAO.save(game);
+	public void testSaveGame() {
+		TsscGame tsscGame = new TsscGame();
+		tsscGame.setAdminPassword("1234");
+		tsscGame.setGuestPassword("1234");
+		tsscGame.setName("hola");
+		tsscGame.setUserPassword("1234");
+		gameDAO.save(tsscGame);
 	}
 	
 	@Test
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-	public void findAll() {
+	public void testUpdateGame() {
+		
+		gameDAO.update(tsscGame);
+	}
+
+	@Test
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+	public void testDeleteGame() {
+		
+		gameDAO.delete(tsscGame);
+	}
+	
+	@Test
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+	public void testFindGameById() {
+		
+		gameDAO.findById(id);
+	}
+	
+	@Test
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+	public void testFindAllGames() {
 		ArrayList<TsscGame> games = (ArrayList<TsscGame>) gameDAO.findAll();
 //		System.out.println();
 	}
+	
+	@Test
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+	public void testFindGameByName() {
+	
+		gameDAO.findByName(name);
+	}
+	
+	@Test
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+	public void testFindGameByDescription() {
+		
+		gameDAO.findByDescription(description);
+	}
 
+	@Test
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+	public void testFindGameByTopicId() {
+		
+		gameDAO.findByTopicId(id);
+	}
+	
+	@Test
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+	public void testFindGameByDateRange() {
+		
+		gameDAO.findByDateRange(scheduledDate, scheduledDate2);
+	}
+	
+	@Test
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+	public void testFindGameByDateAndTimeRange() {
+		
+		gameDAO.findByDateAndTimeRange(scheduledDate, localTime, localTime2);
+	}
 }

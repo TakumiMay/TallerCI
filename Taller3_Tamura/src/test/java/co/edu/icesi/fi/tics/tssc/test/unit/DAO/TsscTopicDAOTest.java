@@ -1,5 +1,7 @@
 package co.edu.icesi.fi.tics.tssc.test.unit.DAO;
 
+import java.util.ArrayList;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,6 +55,13 @@ public class TsscTopicDAOTest extends TestCase {
 	
 	@Test
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+	public void testFindAllTopics() {
+		ArrayList<TsscTopic> topics = (ArrayList<TsscTopic>) topicDAO.findAll();
+//		System.out.println();
+	}
+	
+	@Test
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	public void testFindTopicByName() {
 	
 		topicDAO.findByName(name);
@@ -64,4 +73,5 @@ public class TsscTopicDAOTest extends TestCase {
 		
 		topicDAO.findByDescription(description);
 	}
+	
 }
