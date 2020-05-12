@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="../css/shards.min.css">
+</head>
+<body>
+	<div class="container my-5">
+		<h2 class="text-primary">
+			Topic Management <i class="fas fa-gamepad"></i>
+		</h2>
+		<div th:switch="${tsscTopics}" class="row mt-4">
+			<table class="table">
+				<thead class="thead-light">
+					<tr>
+						<th scope="col">Id</th>
+						<th scope="col">Name</th>
+						<th scope="col">Description</th>
+						<th scope="col">Default Groups</th>
+						<th scope="col">Default Sprints</th>
+						<th scope="col">Group Prefix</th>
+						<th scope="col">Update</th>
+						<th scope="col">Delete</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="topic : ${tsscTopics}">
+						<th scope="row" th:text="${topic.id}"></th>
+						<td th:text="${topic.name}"></td>
+						<td th:text="${topic.description}"></td>
+						<td th:text="${topic.defaultGroups}"></td>
+						<td th:text="${topic.defaultSprints}"></td>
+						<td th:text="${topic.groupPrefix}"></td>
+						<td><a th:href="@{/topics/edit/{id}(id=${topic.id})}"
+							class="btn btn-success">Update <i class="far fa-edit"></i></a></td>
+						<td><a th:href="@{/topics/del/{id}(id=${topic.id})}"
+							class="btn btn-danger">Delete <i class="far fa-trash-alt"></i></a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="row mt-4">
+			<div class="col-md-5">
+				<form action="#" method="post">
+					<div class="row">
+						<div class="col-md-6">
+							<a href="/topics/add" class="btn btn-primary btn-lg active"
+								role="button" aria-pressed="true">Add Topic</a>
+						</div>
+						<div class="col-md-6">
+							<a href="/" class="btn btn-primary btn-lg active" role="button"
+								aria-pressed="true">Go back</a>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

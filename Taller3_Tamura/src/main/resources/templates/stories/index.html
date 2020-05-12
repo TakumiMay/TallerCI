@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="../css/shards.min.css">
+</head>
+<body>
+	<div class="container my-5">
+		<h2 class="text-primary">
+			Story Management <i class="fas fa-gamepad"></i>
+		</h2>
+		<div th:switch="${tsscStories}" class="row mt-4">
+			<table class="table">
+				<thead class="thead-light">
+					<tr>
+						<th scope="col">Id</th>
+						<th scope="col">Description</th>
+						<th scope="col">Business Value</th>
+						<th scope="col">Initial Sprint</th>
+						<th scope="col">Priority</th>
+						<th scope="col">Game</th>
+						<th scope="col">Update</th>
+						<th scope="col">Delete</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="story : ${tsscStories}">
+						<th scope="row" th:text="${story.id}"></th>
+						<td th:text="${story.description}"></td>
+						<td th:text="${story.businessValue}"></td>
+						<td th:text="${story.initialSprint}"></td>
+						<td th:text="${story.priority}"></td>
+						<td><a th:href="@{/stories/edit/{id}(id=${story.id})}"
+							class="btn btn-success">Game<i class="far fa-edit"></i></a></td>
+						<td><a th:href="@{/stories/edit/{id}(id=${story.id})}"
+							class="btn btn-success">Update<i class="far fa-edit"></i></a></td>
+						<td><a th:href="@{/stories/del/{id}(id=${story.id})}"
+							class="btn btn-danger">Delete<i class="far fa-trash-alt"></i></a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="row mt-4">
+			<div class="col-md-5">
+				<form action="#" method="post">
+					<div class="row">
+						<div class="col-md-6">
+							<a href="/stories/add" class="btn btn-primary btn-lg active"
+								role="button" aria-pressed="true">Add Story</a>
+						</div>
+						<div class="col-md-6">
+							<a href="/" class="btn btn-primary btn-lg active" role="button"
+								aria-pressed="true">Go back</a>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
