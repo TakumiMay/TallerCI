@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
 
@@ -51,8 +52,8 @@ public class TsscGameDAOImp implements TsscGameDAO {
 	}
 
 	@Override
-	public List<TsscGame> findByDescription(String description) {
-		String jpql = "Select game FROM TsscGame game WHERE game.description="+description;
+	public List<TsscGame> findByTopicDescription(String description) {
+		String jpql = "Select game FROM TsscGame game WHERE game.tsscTopic.description="+description;
 		return entityManager.createQuery(jpql).getResultList();
 	}
 
@@ -72,6 +73,14 @@ public class TsscGameDAOImp implements TsscGameDAO {
 	public List<TsscGame> findByDateAndTimeRange(LocalDate scheduledDate, LocalTime localTime, LocalTime localTime2) {
 		String jpql = ("Select game FROM TsscGame game WHERE game.scheduledDate ="+scheduledDate+" AND game.localTime BETWEEN "+localTime+" AND "+localTime2);
 		return entityManager.createQuery(jpql).getResultList();
+	}
+
+	@Override
+	public List<Object[]> findByDateAndReturnTopics(LocalDate scheduledDate) {
+		String jpql = "Select game.tsscTopic, game FROM TsscGame game WHERE game.scheduledDate=:date ORDER BY game.scheduledTime ASC";
+		Query query = entityManager.createQuery(jpql);
+		query.setParameter("date", scheduledDate);
+		return query.getResultList();
 	}
 
 }

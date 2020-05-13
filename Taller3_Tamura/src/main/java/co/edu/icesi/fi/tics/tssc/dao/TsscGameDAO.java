@@ -15,9 +15,10 @@ public interface TsscGameDAO {
 	public TsscGame findById(long id);
 	public List<TsscGame> findAll();
 	public List<TsscGame> findByName(String name);
-	public List<TsscGame> findByDescription(String description);
+	public List<TsscGame> findByTopicDescription(String description);
 	public List<TsscGame> findByTopicId(long id);
 	public List<TsscGame> findByDateRange(LocalDate scheduledDate, LocalDate scheduledDate2);
 	public List<TsscGame> findByDateAndTimeRange(LocalDate scheduledDate, LocalTime localTime, LocalTime localTime2);
+	public List<Object[]> findByDateAndReturnTopics(LocalDate scheduledDate);
 	
 }

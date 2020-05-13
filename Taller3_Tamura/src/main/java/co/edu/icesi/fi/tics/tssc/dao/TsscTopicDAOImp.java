@@ -1,5 +1,6 @@
 package co.edu.icesi.fi.tics.tssc.dao;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -50,6 +51,13 @@ public class TsscTopicDAOImp implements TsscTopicDAO {
 	@Override
 	public List<TsscTopic> findByDescription(String description) {
 		String jpql = "Select topic FROM TsscTopic topic WHERE topic.description="+description;
+		return entityManager.createQuery(jpql).getResultList();
+	}
+//FALTAA	
+	@Override
+	public List<TsscTopic> findByGameDate(LocalDate scheduledDate) {
+		// TODO Auto-generated method stub
+		String jpql = "Select topic FROM TsscTopic topic WHERE ";
 		return entityManager.createQuery(jpql).getResultList();
 	}
 
