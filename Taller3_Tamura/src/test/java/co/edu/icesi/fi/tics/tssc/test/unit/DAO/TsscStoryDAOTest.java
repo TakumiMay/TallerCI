@@ -70,6 +70,7 @@ public class TsscStoryDAOTest extends TestCase {
 	@Test
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	public void testDeleteStory() {
+		setUp();
 		TsscStory tsscStory1 = storyDAO.findById(1);
 		
 		storyDAO.delete(tsscStory1);
@@ -89,6 +90,7 @@ public class TsscStoryDAOTest extends TestCase {
 	@Test
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	public void testFindAllStories() {
+		setUp();
 		TsscStory tsscStory2 = new TsscStory();
 		tsscStory2.setAltDescShown("altDescShown2");
 		tsscStory2.setAltDescripton("altDescripton2");

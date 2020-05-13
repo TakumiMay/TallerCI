@@ -189,15 +189,31 @@ public class TsscGameDAOTest extends TestCase {
 	@Test
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	public void testFindGameByDateRange() {
-		//LocalDate localDate = 
-		//gameDAO.findByDateRange(scheduledDate, scheduledDate2);
+		TsscGame tsscGame1 = gameDAO.findById(1);
+		tsscGame1.setScheduledDate(LocalDate.of(2020, 01, 28));
+		
+		LocalDate scheduledDate = LocalDate.of(2019, 07, 23);
+		LocalDate scheduledDate2 = LocalDate.now();
+		ArrayList<TsscGame> games = (ArrayList<TsscGame>) gameDAO.findByDateRange(scheduledDate, scheduledDate2);
+		
+		assertNotNull(games);
+		assertEquals(1, games.size());
 	}
 	
 	@Test
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	public void testFindGameByDateAndTimeRange() {
+		TsscGame tsscGame1 = gameDAO.findById(1);
+		tsscGame1.setScheduledDate(LocalDate.now());
+		tsscGame1.setScheduledTime(LocalTime.of(9, 30));
 		
-		//gameDAO.findByDateAndTimeRange(scheduledDate, localTime, localTime2);
+		LocalDate scheduledDate = LocalDate.now();
+		LocalTime time1 = LocalTime.of(5, 12);
+		LocalTime time2 = LocalTime.of(11, 11);
+		ArrayList<TsscGame> games = (ArrayList<TsscGame>) gameDAO.findByDateAndTimeRange(scheduledDate, time1, time2);
+		
+		assertNotNull(games);
+		assertEquals(1, games.size());
 	}
 	
 	@Test
