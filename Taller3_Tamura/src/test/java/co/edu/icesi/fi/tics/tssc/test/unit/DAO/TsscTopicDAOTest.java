@@ -67,6 +67,7 @@ public class TsscTopicDAOTest extends TestCase {
 	@Test
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	public void testDeleteTopic() {
+		setUp();
 		TsscTopic tsscTopic = topicDAO.findById(1);
 		
 		topicDAO.delete(tsscTopic);
@@ -86,6 +87,7 @@ public class TsscTopicDAOTest extends TestCase {
 	@Test
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	public void testFindAllTopics() {
+		setUp();
 		TsscTopic tsscTopic2 = new TsscTopic();
 		tsscTopic2.setDescription("description2");
 		tsscTopic2.setName("name2");
